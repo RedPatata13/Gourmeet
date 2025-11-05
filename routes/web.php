@@ -26,5 +26,5 @@ Route::post('/reset-password', [App\Http\Controllers\Auth\NewPasswordController:
 
 // Home route
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });

@@ -25,8 +25,8 @@ if(Test-Path ".env.example"){
     Write-Host "how tf" -ForegroundColor Yellow
     exit
 }
-
+Write-Host "`nKeyGen..."
 php artisan key:generate
 Write-Host "`nWe done setting up in da script. Fill up mo db sa .env" -ForegroundColor Green
 
-Write-Host "`nPara mag run: 'php artisan serve' sa isant terminal and then 'npm run dev' sa isa pang terminal should work"
+Write-Host "`nPara mag run: 'php artisan serve' sa isant terminal and then 'npm run dev' sa isa pang terminal should work" -ForegroundColor Green

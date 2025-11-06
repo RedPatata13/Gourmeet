@@ -40,7 +40,7 @@
                 <!-- error -->
                 <div id="errorMessage" class="hidden mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg"></div>
 
-                <form id="registerForm">
+                <form id="registerForm" action="{{ route('register') }}" method="POST">
                     @csrf
                     
                     <!-- name -->
@@ -190,6 +190,47 @@
                         <p class="text-gray-600 mt-2">Creating your account...</p>
                     </div>
                 </form>
+
+                <script>
+                    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+                        e.preventDefault();
+
+                        // Reset messages
+                        resetMessages();
+                        showLoading(true);
+
+                        const formData = new FormData(this);
+
+                        try {
+                            const response = await fetch('{{ route('register') }}', {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: formData  // Use FormData instead of JSON
+                            });
+
+                            const result = await response.json();
+
+                            if (response.ok) {
+                                showSuccess('Account created successfully! Redirecting...');
+                                setTimeout(() => {
+                                    window.location.href = '{{ route('home') }}';
+                                }, 2000);
+                            } else {
+                                if (result.errors) {
+                                    showFieldErrors(result.errors);
+                                } else {
+                                    showError(result.message || 'An error occurred during registration.');
+                                }
+                            }
+                        } catch (error) {
+                            showError('Network error. Please try again.');
+                        } finally {
+                            showLoading(false);
+                        }
+                    });
+                </script>
 
                 <!-- basta ung ano -->
                 <div class="mt-8 flex items-center">

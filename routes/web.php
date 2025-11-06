@@ -1,30 +1,48 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-// Page routes
-Route::get('/login', [PageController::class, 'login'])->name('login');
-Route::get('/register', [PageController::class, 'register'])->name('register');
+Route::middleware('guest')->group(function () {
+    //auth
+    Route::get('/login', [PageController::class, 'login'])->name('login');
+    Route::get('/register', [PageController::class, 'register'])->name('register');
+    
+    // auth
+    Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/register', [RegisterController::class, 'store']);
+    
+    // password stuff
+    Route::get('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'create'])
+        ->name('password.request');
+    Route::post('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'store'])
+        ->name('password.email');
+    Route::get('/reset-password/{token}', [App\Http\Controllers\Auth\NewPasswordController::class, 'create'])
+        ->name('password.reset');
+    Route::post('/reset-password', [App\Http\Controllers\Auth\NewPasswordController::class, 'store'])
+        ->name('password.update');
+});
 
-// Password reset routes (keep these as web routes)
-Route::get('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'create'])
-    ->middleware('guest')
-    ->name('password.request');
+// put routes that need user data here (p much anything that wasnt in the login and sign up page)
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    })->name('home');
 
-Route::post('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'store'])
-    ->middleware('guest')
-    ->name('password.email');
+    Route::get('/recipes', function () {
+        return view('recipes');
+    })->name('recipes');
+});
 
-Route::get('/reset-password/{token}', [App\Http\Controllers\Auth\NewPasswordController::class, 'create'])
-    ->middleware('guest')
-    ->name('password.reset');
-
-Route::post('/reset-password', [App\Http\Controllers\Auth\NewPasswordController::class, 'store'])
-    ->middleware('guest')
-    ->name('password.update');
-
-// Home route
-Route::get('/', function () {
-    return view('login');
+// this shit prob appears if something didn't get configged
+Route::get('/welcome', function () {
+    return view('welcome');
 });

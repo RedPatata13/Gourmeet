@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - RecipeShare</title>
+    <title>Login - Gourmeet</title>
     @vite('resources/css/app.css')
 </head>
-<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+<body class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
     <div class="w-full max-w-md">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-gray-900 px-6 py-8 text-center">
@@ -16,7 +16,7 @@
                         </svg>
                     </div>
                 </div>
-                <h1 class="mt-4 text-2xl font-bold text-white">RecipeShare</h1>
+                <h1 class="mt-4 text-2xl font-bold text-white">Gourmeet</h1>
                 <p class="text-gray-300 mt-2">Welcome back to your cooking community</p>
             </div>
 
@@ -123,9 +123,9 @@
 
                 <!-- ung line -->
                 <div class="mt-8 flex items-center">
-                    <div class="flex-grow border-t border-gray-300"></div>
-                    <span class="mx-4 text-sm text-gray-500">New to RecipeShare?</span>
-                    <div class="flex-grow border-t border-gray-300"></div>
+                    <div class="grow border-t border-gray-300"></div>
+                    <span class="mx-4 text-sm text-gray-500">New to Gourmeet?</span>
+                    <div class="grow border-t border-gray-300"></div>
                 </div>
 
                 <div class="mt-6 text-center">

@@ -55,7 +55,6 @@
                             >
                             <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
                                 </svg>
                             </div>
                         </div>
@@ -67,7 +66,6 @@
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
-                            <a href="{{ route('password.request') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900">Forgot password?</a>
                         </div>
                         <div class="relative">
                             <input
@@ -100,7 +98,7 @@
                             >
                             Remember me
                         </label>
-                        <span class="text-gray-400">Secure login</span>
+                        <a href="{{ route('password.request') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900">Forgot password?</a>
                     </div>
 
                     <button
@@ -116,12 +114,11 @@
                     <a href="{{ route('register') }}" class="font-semibold text-gray-900 hover:underline">Sign up</a>
                 </p>
 
-                <div class="mt-10 flex items-center gap-3 text-gray-400">
+                {{--<div class="mt-10 flex items-center gap-3 text-gray-400">
                     <div class="h-px flex-1 bg-gray-200"></div>
                     <span class="text-sm uppercase tracking-[0.18em]"></span>
                     <div class="h-px flex-1 bg-gray-200"></div>
-                </div>
-                <p class="mt-3 text-center text-sm text-gray-500">Enter any email and password to log in</p>
+                </div>--}}
             </div>
         </div>
 

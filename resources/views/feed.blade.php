@@ -88,17 +88,77 @@
 
         <!-- Recipe Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-                <!-- food card -->
-            <x-food-card></x-food-card>
+            <!-- Chocolate Lava Cake -->
+            <x-food-card 
+                title="Chocolate Lava Cake"
+                description="Decadent individual chocolate cakes with a molten chocolate center. Pure indulgence!"
+                image="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop"
+                category="Dessert"
+                prepTime="15 mins"
+                servings="4"
+                likes="24"
+                userName="James Wilson"
+            />
 
-                <!-- food card -->
-            <x-food-card></x-food-card>
+            <!-- Avocado Toast with Poached Egg -->
+            <x-food-card 
+                title="Avocado Toast with Poached Egg"
+                description="Creamy avocado on crispy sourdough topped with a perfectly poached egg."
+                image="https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=300&fit=crop"
+                category="Breakfast"
+                prepTime="5 mins"
+                servings="2"
+                likes="18"
+                userName="Michael Chen"
+            />
 
-                <!-- food card -->
-            <x-food-card></x-food-card>
+            <!-- Margherita Pizza -->
+            <x-food-card 
+                title="Margherita Pizza"
+                description="Classic Italian pizza with fresh mozzarella, tomatoes, and basil."
+                image="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop"
+                category="Dinner"
+                prepTime="20 mins"
+                servings="4"
+                likes="32"
+                userName="Emma Rodriguez"
+            />
 
-                <!-- food card -->
-            <x-food-card></x-food-card>
+            <!-- Fluffy Buttermilk Pancakes -->
+            <x-food-card 
+                title="Fluffy Buttermilk Pancakes"
+                description="Light and fluffy pancakes perfect for a weekend breakfast. Serve with maple syrup and fresh berries."
+                image="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop"
+                category="Breakfast"
+                prepTime="10 mins"
+                servings="4"
+                likes="28"
+                userName="Sarah Johnson"
+            />
+
+            <!-- Classic Caesar Salad -->
+            <x-food-card 
+                title="Classic Caesar Salad"
+                description="A crisp and refreshing Caesar salad with homemade croutons and creamy dressing."
+                image="https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop"
+                category="Lunch"
+                prepTime="15 mins"
+                servings="4"
+                likes="21"
+                userName="Michael Chen"
+            />
+
+            <!-- Grilled Salmon with Lemon Butter -->
+            <x-food-card 
+                title="Grilled Salmon with Lemon Butter"
+                description="Tender grilled salmon fillets with a zesty lemon butter sauce. Perfect for a healthy dinner."
+                image="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop"
+                category="Dinner"
+                prepTime="10 mins"
+                servings="4"
+                likes="35"
+                userName="Emma Rodriguez"
+            />
         </div>
     </div>
 </x-app-layout> 

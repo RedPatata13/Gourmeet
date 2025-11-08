@@ -1,5 +1,34 @@
 <!-- Well begun is half done. - Aristotle -->
-<div onclick="document.getElementById('viewRecipe').classList.remove('hidden'); document.body.classList.add('overflow-hidden'); " class="w-[280px] h-[478px] bg-white border border-gray-200 rounded-lg shadow-lg">
+<div 
+    onclick="openRecipeModal(this)"
+    class="w-[280px] h-[478px] bg-white border border-gray-200 rounded-lg shadow-lg cursor-pointer"
+    data-recipe-id="{{ $recipeId ?? '' }}"
+    data-title="{{ $title }}"
+    data-description="{{ $description }}"
+    data-image="{{ $image }}"
+    data-category="{{ $category }}"
+    data-category-color="{{ $categoryColor }}"
+    data-prep-time="{{ $prepTime }}"
+    data-servings="{{ $servings }}"
+    data-likes="{{ $likes }}"
+    data-user-name="{{ $userName }}"
+    data-user-avatar="{{ $userAvatar }}"
+    @if($ingredients && is_array($ingredients) && count($ingredients) > 0)
+        data-ingredients="{{ htmlspecialchars(json_encode($ingredients), ENT_QUOTES, 'UTF-8') }}"
+    @else
+        data-ingredients="[]"
+    @endif
+    @if($instructions && is_array($instructions) && count($instructions) > 0)
+        data-instructions="{{ htmlspecialchars(json_encode($instructions), ENT_QUOTES, 'UTF-8') }}"
+    @else
+        data-instructions="[]"
+    @endif
+    @if(isset($comments) && is_array($comments) && count($comments) > 0)
+        data-comments="{{ htmlspecialchars(json_encode($comments), ENT_QUOTES, 'UTF-8') }}"
+    @else
+        data-comments="[]"
+    @endif
+>
     <!-- Image Container with Category Tag -->
     <div class="relative">
         <a>

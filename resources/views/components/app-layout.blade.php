@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard - Gourmeet</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -87,6 +88,10 @@
 <x-view-recipe>
 
 </x-view-recipe>
+
+<x-edit-recipe>
+
+</x-edit-recipe>
 
     <!-- Include Terms of Service Modal -->
     <x-tosModal />

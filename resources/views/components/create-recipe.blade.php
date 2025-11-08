@@ -1,6 +1,6 @@
 <div id="createRecipe" class="fixed inset-0  overflow-y-auto hidden" aria-labelledby="modal-title-createRecipe" role="dialog" aria-model="true">
 
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" >    
+    <div class="fixed inset-0 bg-gray-900/37 transition-opacity" >    
 
         <!-- modal container -->
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0 z-99">
@@ -10,7 +10,7 @@
                     <div class="bg-white p-6 sm:p-8">
                            <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
                                 <h3 class="text-xl font-semibold text-gray-900">Create New Recipe</h3>
-                                <button onclick="document.getElementById('createRecipe').classList.add('hidden')" id="close-recipe-modal-x" class="text-gray-400 hover:text-gray-700 transition">
+                                <button onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden');"  id="close-recipe-modal-x" class="text-gray-400 hover:text-gray-700 transition">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
@@ -94,12 +94,12 @@
 
                     <div class="flex justify-end items-end px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
                         <button 
-                            onclick="document.getElementById('createRecipe').classList.add('hidden')"
+                            onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden');" 
                             type="button" 
-                            class="px-4 py-2 mr-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
+                            class="cursor-pointer px-4 py-2 mr-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 rounded-lg hover:bg-gray-50 transition duration-150">
                             Close
                         </button>                
-                        <button class="px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150">
+                        <button class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150">
                             Create Recipe
                         </button>    
                     </div>

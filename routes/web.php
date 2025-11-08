@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Recipe\RecipeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -46,3 +47,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+
+
+Route::post('/recipes', [RecipeController::class, 'store'])->middleware('auth:sanctum');

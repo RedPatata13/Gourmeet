@@ -65,7 +65,6 @@
                         <li>To enable you to post and share recipes</li>
                         <li>To manage and respond to your comments, questions, and feedback</li>
                         <li>To personalize your experience on our platform</li>
-                        <li>To send you updates, newsletters, and marketing communications (with your consent)</li>
                         <li>To improve our website and services</li>
                         <li>To monitor and analyze usage and trends</li>
                         <li>To detect, prevent and address technical issues and security threats</li>

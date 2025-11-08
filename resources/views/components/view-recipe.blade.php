@@ -652,7 +652,222 @@
             alert('Recipe ID not found');
             return;
         }
-        console.log('Edit recipe:', recipeId);
+
+        // Get recipe data from the modal
+        const recipeData = {
+            recipeId: recipeId,
+            title: document.getElementById('modal-recipe-title').textContent,
+            description: document.getElementById('modal-recipe-description').textContent,
+            image: document.getElementById('modal-recipe-image').src,
+            category: document.getElementById('modal-category-tag').textContent,
+            prepTime: document.getElementById('modal-prep-time').textContent,
+            servings: document.getElementById('modal-servings').textContent.replace(' servings', ''),
+            cookTime: '', // Not currently displayed, will need to be added to data attributes
+            ingredients: [],
+            instructions: []
+        };
+
+        // Get ingredients from the modal
+        const ingredientsList = document.getElementById('modal-ingredients');
+        const ingredientItems = ingredientsList.querySelectorAll('li');
+        ingredientItems.forEach(item => {
+            const text = item.textContent.trim();
+            if (text && !text.includes('Example ingredient')) {
+                recipeData.ingredients.push(text.replace(/^•\s*/, ''));
+            }
+        });
+
+        // Get instructions from the modal
+        const instructionsList = document.getElementById('modal-instructions');
+        const instructionItems = instructionsList.querySelectorAll('li');
+        instructionItems.forEach(item => {
+            const textSpan = item.querySelector('span:last-child');
+            if (textSpan) {
+                const text = textSpan.textContent.trim();
+                if (text && !text.includes('Example instruction')) {
+                    recipeData.instructions.push(text);
+                }
+            }
+        });
+
+        // Get cook time from data attributes if available
+        const cardElement = document.querySelector(`[data-recipe-id="${recipeId}"]`);
+        if (cardElement) {
+            const cookTime = cardElement.getAttribute('data-cook-time');
+            if (cookTime) {
+                recipeData.cookTime = cookTime;
+            }
+        }
+
+        // Close view modal
+        document.getElementById('viewRecipe').classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        
+        // Small delay to ensure view modal is closed
+        setTimeout(function() {
+            // Try to show edit modal directly first
+            const editModal = document.getElementById('editRecipe');
+            if (!editModal) {
+                console.error('Edit modal element not found in DOM');
+                alert('Edit modal not found. Please refresh the page.');
+                return;
+            }
+
+            console.log('Edit modal element found, attempting to show...');
+            
+            // Populate form fields directly
+            const recipeIdEl = document.getElementById('edit-recipe-id');
+            const titleEl = document.getElementById('edit-recipe-title');
+            const descriptionEl = document.getElementById('edit-recipe-description');
+            const servingsEl = document.getElementById('edit-recipe-servings');
+            const prepTimeEl = document.getElementById('edit-recipe-prep-time');
+            const cookTimeEl = document.getElementById('edit-recipe-cook-time');
+            const imageEl = document.getElementById('edit-recipe-image-url');
+
+            if (recipeIdEl) recipeIdEl.value = recipeData.recipeId || '';
+            if (titleEl) titleEl.value = recipeData.title || '';
+            if (descriptionEl) descriptionEl.value = recipeData.description || '';
+            if (servingsEl) servingsEl.value = recipeData.servings || '';
+            if (prepTimeEl) prepTimeEl.value = recipeData.prepTime || '';
+            if (cookTimeEl) cookTimeEl.value = recipeData.cookTime || '';
+            if (imageEl) imageEl.value = recipeData.image || '';
+
+            // Set category
+            if (recipeData.category) {
+                const categorySelect = document.getElementById('edit-recipe-category');
+                const categorySelectedText = document.getElementById('edit-category-selected-text');
+                if (categorySelect) categorySelect.value = recipeData.category;
+                if (categorySelectedText) categorySelectedText.textContent = recipeData.category;
+                
+                // Update checkmarks
+                document.querySelectorAll('.edit-category-option').forEach(opt => {
+                    const checkmark = opt.querySelector('.checkmark');
+                    if (opt.getAttribute('data-value') === recipeData.category) {
+                        if (checkmark) checkmark.classList.remove('hidden');
+                    } else {
+                        if (checkmark) checkmark.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Populate ingredients
+            const ingredientsContainer = document.getElementById('edit-ingredients-container');
+            if (ingredientsContainer) {
+                ingredientsContainer.innerHTML = '';
+                if (recipeData.ingredients && Array.isArray(recipeData.ingredients) && recipeData.ingredients.length > 0) {
+                    recipeData.ingredients.forEach((ingredient, index) => {
+                        const ingredientDiv = document.createElement('div');
+                        ingredientDiv.className = 'edit-ingredient-item flex gap-2';
+                        ingredientDiv.innerHTML = `
+                            <input 
+                                type="text" 
+                                name="ingredients[]"
+                                value="${(ingredient || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;')}" 
+                                placeholder="Ingredient ${index + 1}" 
+                                class="flex-1 border border-gray-300 rounded-lg shadow-sm p-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#111827] focus:border-[#111827] transition"
+                                required
+                            />
+                            <button 
+                                type="button" 
+                                class="edit-remove-ingredient-btn text-gray-400 hover:text-red-600 transition p-2"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        `;
+                        ingredientsContainer.appendChild(ingredientDiv);
+                    });
+                } else {
+                    // Add one empty ingredient field
+                    const ingredientDiv = document.createElement('div');
+                    ingredientDiv.className = 'edit-ingredient-item flex gap-2';
+                    ingredientDiv.innerHTML = `
+                        <input 
+                            type="text" 
+                            name="ingredients[]"
+                            placeholder="Ingredient 1" 
+                            class="flex-1 border border-gray-300 rounded-lg shadow-sm p-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#111827] focus:border-[#111827] transition"
+                            required
+                        />
+                        <button 
+                            type="button" 
+                            class="edit-remove-ingredient-btn hidden text-gray-400 hover:text-red-600 transition p-2"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    `;
+                    ingredientsContainer.appendChild(ingredientDiv);
+                }
+            }
+
+            // Populate instructions
+            const instructionsContainer = document.getElementById('edit-instructions-container');
+            if (instructionsContainer) {
+                instructionsContainer.innerHTML = '';
+                if (recipeData.instructions && Array.isArray(recipeData.instructions) && recipeData.instructions.length > 0) {
+                    recipeData.instructions.forEach((instruction, index) => {
+                        const instructionDiv = document.createElement('div');
+                        instructionDiv.className = 'edit-instruction-item flex gap-2';
+                        instructionDiv.innerHTML = `
+                            <span class="flex items-center text-gray-500 font-medium pt-2">${index + 1}.</span>
+                            <textarea 
+                                name="instructions[]"
+                                rows="2" 
+                                placeholder="Step ${index + 1}" 
+                                class="flex-1 border border-gray-300 rounded-lg shadow-sm p-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#111827] focus:border-[#111827] resize-none transition"
+                                required
+                            >${(instruction || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+                            <button 
+                                type="button" 
+                                class="edit-remove-instruction-btn text-gray-400 hover:text-red-600 transition p-2"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        `;
+                        instructionsContainer.appendChild(instructionDiv);
+                    });
+                } else {
+                    // Add one empty instruction field
+                    const instructionDiv = document.createElement('div');
+                    instructionDiv.className = 'edit-instruction-item flex gap-2';
+                    instructionDiv.innerHTML = `
+                        <span class="flex items-center text-gray-500 font-medium pt-2">1.</span>
+                        <textarea 
+                            name="instructions[]"
+                            rows="2" 
+                            placeholder="Step 1" 
+                            class="flex-1 border border-gray-300 rounded-lg shadow-sm p-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#111827] focus:border-[#111827] resize-none transition"
+                            required
+                        ></textarea>
+                        <button 
+                            type="button" 
+                            class="edit-remove-instruction-btn hidden text-gray-400 hover:text-red-600 transition p-2"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    `;
+                    instructionsContainer.appendChild(instructionDiv);
+                }
+            }
+
+            // Show modal
+            console.log('Removing hidden class from edit modal');
+            editModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            console.log('Edit modal should now be visible');
+            
+            // Call the function if it exists (for additional setup)
+            if (typeof window.openEditRecipeModal === 'function') {
+                window.openEditRecipeModal(recipeData);
+            }
+        }, 100);
     }
 
     function deleteRecipe() {

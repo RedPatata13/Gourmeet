@@ -71,9 +71,9 @@
                 <!-- feet stuff (texts) 😏 -->
                 <div class="flex items-center">
                     <label class="inline-flex items-center gap-2 text-gray-700">
-                            <a href="#" class="text-gray-900 hover:underline font-medium font-bold">Terms of Service</a> and 
-                            <a href="#" class="text-gray-900 hover:underline font-medium font-bold">Privacy Policy</a>
-                        </label>
+                            <a href="#" id="tosLink" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
+                            <a href="#" id="privacyLink" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
+                    </label>
                 </div>
             </div>
         </div>
@@ -84,6 +84,12 @@
 
 </x-create-recipe>
 
+    <!-- Include Terms of Service Modal -->
+    <x-tosModal />
+    
+    <!-- Include Privacy Policy Modal -->
+    <x-privacy-policy-Modal />
+
     <script>
         // for handling of clicked button group on mainFoodPage
         function handleSelection(clickedButton) {
@@ -91,11 +97,17 @@
             const buttons = parent.querySelectorAll('button');
             buttons.forEach(button => {
                 button.setAttribute('aria-pressed', 'false');
+                // Reset styling for all buttons
+                if (button.classList.contains('bg-[#111827]')) {
+                    button.classList.remove('bg-[#111827]', 'text-white');
+                    button.classList.add('bg-white', 'text-[#111827]');
+                }
             });
-            clickedButton.setAttribute('aria-pressed', 'true');            
+            clickedButton.setAttribute('aria-pressed', 'true');
+            // Apply active styling to clicked button
+            clickedButton.classList.remove('bg-white', 'text-[#111827]');
+            clickedButton.classList.add('bg-[#111827]', 'text-white');
         }
-
-
     </script>
 </body>
 </html>

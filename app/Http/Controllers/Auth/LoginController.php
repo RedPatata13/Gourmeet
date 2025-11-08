@@ -42,7 +42,11 @@ class LoginController extends Controller
         //     ]
         // ]);
 
-        return redirect()->intended(route('dashboard')); // I get this part
+// <<<<<<< HEAD
+//         return redirect()->intended(route('dashboard')); // I get this part
+// =======
+        return redirect()->intended(route('feed'));
+// >>>>>>> yoeBranch
     }
     /**
      * Logs out current user

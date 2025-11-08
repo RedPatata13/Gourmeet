@@ -31,7 +31,18 @@ class RecipeController extends Controller
 
         return response()->json(['message', 'Recipe created successfully', 'recipe' => $recipe]);
     }
-
+    public function show(Recipe $recipe){
+        $recipe->load('user');
+        return view('recipeDetails', compact('recipe'));
+    }
+    public function showBySlug($slug)
+    {
+        $recipe = Recipe::with('user')
+                        ->where('slug', $slug)
+                        ->firstOrFail();
+        
+        return view('recipeDetails', compact('recipe'));
+    }
     public function react(Request $request, Recipe $recipe){
         $validated = $request->validate(['type' => 'required|string']);
 
@@ -61,4 +72,11 @@ class RecipeController extends Controller
 
         $recipe->increment('comment_count');
     }
+// app/Http/Controllers/RecipeController.php
+public function index()
+{
+    $recipes = Recipe::with('user')->get();
+    return view('recipes.index', compact('recipes'));
+}
+
 }

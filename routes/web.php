@@ -44,16 +44,19 @@ Route::middleware('guest')->group(function () {
 // });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/feed', function () {
-        return view('feed'); 
-    })->name('feed');
+    // Route::get('/feed', function () {
+    //     return view('feed'); 
+    // })->name('feed');
     
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     
     // testing for the layout stuff
-    Route::get('/', function () {
-        return view('feed'); 
-    })->name('home');
+    // Route::get('/', function () {
+    //     return view('recipes.index'); 
+    // })->name('home');
+    Route::get('/', fn() => view('recipes.index', ['recipes' => \App\Models\Recipe::all()]))->name('home');
+    Route::get('/feed', fn() => view('recipes.index', ['recipes' => \App\Models\Recipe::all()]))->name('feed');
+
 
     Route::get('/profile', function () {
         return view('profile'); 
@@ -64,6 +67,14 @@ Route::middleware('auth')->group(function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+
+// routes/web.php
+
+
+Route::get('/recipes', fn() => view('recipes.index', ['recipes' => \App\Models\Recipe::all()]));
+// Route::get('/recipe-details', fn() => view('recipeDetails'), data: ['recipes' => \App\Models\Recipe]);
+Route::get('/recipe/{recipe}', [RecipeController::class, 'show'])->name('recipeDetails');
+
 
 
 Route::post('/recipes', [RecipeController::class, 'store'])->middleware('auth:sanctum');

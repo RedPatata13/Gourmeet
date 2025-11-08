@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ $title ?? 'Dashboard' }} - Gourmeet</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Dashboard - Gourmeet</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-gray-50 flex flex-col">
@@ -102,10 +103,29 @@
         </div>
     </footer>
 
+<<<<<<< HEAD
     {{-- COMPONENTS --}}
     <x-create-recipe />
     <x-view-recipe />
     {{-- <x-tosModal /> --}}
+=======
+<x-create-recipe>
+
+</x-create-recipe>
+
+<x-view-recipe>
+
+</x-view-recipe>
+
+<x-edit-recipe>
+
+</x-edit-recipe>
+
+    <!-- Include Terms of Service Modal -->
+    <x-tosModal />
+    
+    <!-- Include Privacy Policy Modal -->
+>>>>>>> d8d1cad46c0a6641f9238ea673f5eeeaf6d42112
     <x-privacy-policy-Modal />
 
     {{-- SCRIPTS --}}

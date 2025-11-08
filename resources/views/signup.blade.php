@@ -12,10 +12,14 @@
             <div class="w-full max-w-md mx-auto">
                 <div class="flex flex-col items-center text-center mb-10">
                     <div class="h-14 w-14 rounded-full bg-gray-900 text-white flex items-center justify-center shadow-lg">
-                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
-                            <path d="M221.9,155.1a12,12,0,0,0-17-1.9C186.1,168.6,157.8,180,128,180s-58.1-11.4-76.9-26.8a12,12,0,1,0-15.1,18.7C58.6,190,91.6,204,128,204s69.4-14,92-32.1A12,12,0,0,0,221.9,155.1Z"/>
-                            <path d="M70.1,128.3A12,12,0,0,0,84,139.7c14.8-9.7,29.5-14.5,44-14.7v24a12,12,0,0,0,24,0v-24c14.5.2,29.2,5,44,14.7a12,12,0,1,0,13.9-11.4C189.8,117.7,161.6,108,128,108S66.2,117.7,70.1,128.3Z"/>
-                            <path d="M76,88A52,52,0,0,1,128,36h0a52,52,0,0,1,52,52c0,2.5-.2,5-.5,7.4a12,12,0,0,0,23.7,3.2A76,76,0,1,0,52.8,95c.3-2.4.5-4.9.5-7.4Z"/>
+                        <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                            <rect width="256" height="256" fill="none"/>
+                            <line x1="96" y1="160" x2="88" y2="128" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+                            <line x1="160" y1="160" x2="168" y2="128" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+                            <line x1="128" y1="160" x2="128" y2="128" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M173.65,65.12A48,48,0,1,1,184,160H72A48,48,0,1,1,82.35,65.12" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M80,80a48,48,0,0,1,96,0" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M200,157.27V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V157.27" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
                         </svg>
                     </div>
                     <h1 class="mt-6 text-3xl font-semibold text-gray-900">Gourmeet</h1>

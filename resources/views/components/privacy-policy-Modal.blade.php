@@ -157,17 +157,6 @@
                         We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this policy.
                     </p>
                 </div>
-
-                <div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">14. Contact Us</h3>
-                    <p class="text-gray-700 leading-relaxed">
-                        If you have any questions about this Privacy Policy, please contact us at:
-                    </p>
-                    <p class="text-gray-700 leading-relaxed mt-2">
-                        <strong>Email:</strong> gourmeet@gmail.com<br>
-                        <strong>Address:</strong> Gourmeet Privacy Team
-                    </p>
-                </div>
             </div>
         </div>
     </div>

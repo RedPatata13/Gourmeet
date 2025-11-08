@@ -137,7 +137,7 @@
                                 class="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
                             >
                             I agree to the 
-                            <a href="#" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
+                            <a href="#" id="tosLink" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
                             <a href="#" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
                         </label>
                     </div>
@@ -176,6 +176,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Include Terms of Service Modal -->
+    <x-tosModal />
 
     <script>
         document.getElementById('registerForm').addEventListener('submit', async function(e) {

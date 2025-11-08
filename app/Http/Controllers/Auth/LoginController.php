@@ -43,7 +43,7 @@ class LoginController extends Controller
         //     ]
         // ]);
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('feed'));
     }
     /**
      * Logs out current user

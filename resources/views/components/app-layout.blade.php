@@ -36,7 +36,7 @@
                     <div class="flex-shrink-0">
                         <span class="text-gray-700 mr-4">Welcome, {{ Auth::user()->name }}!</span>
                     </div>
-                    <button onclick="document.getElementById('createRecipe').classList.remove('hidden')" type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm font-medium">
+                    <button onclick="document.getElementById('createRecipe').classList.remove('hidden'); document.body.classList.add('overflow-hidden'); " type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm font-medium">
                         + Create Recipe
                     </button>
                 </div>
@@ -83,6 +83,10 @@
 <x-create-recipe>
 
 </x-create-recipe>
+
+<x-view-recipe>
+
+</x-view-recipe>
 
     <!-- Include Terms of Service Modal -->
     <x-tosModal />

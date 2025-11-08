@@ -1,9 +1,10 @@
 <!-- Well begun is half done. - Aristotle -->
-<div class="w-full max-w-[280px] bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col">
+<div onclick="document.getElementById('viewRecipe').classList.remove('hidden'); document.body.classList.add('overflow-hidden'); " class="w-[280px] h-[478px] bg-white border border-gray-200 rounded-lg shadow-lg">
     <!-- Image Container with Category Tag -->
     <div class="relative">
-        <a href="#">
+        <a>
             <img class="w-full h-48 object-cover" src="{{ $image }}" alt="{{ $title }}" />
+             <!-- <img class="rounded-t-lg object-cover h-59 w-full" src="" alt="There's food in here somewhere..." /> -->
         </a>
         <!-- Category Tag -->
         <div class="absolute top-3 right-3">

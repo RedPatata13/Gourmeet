@@ -1,7 +1,8 @@
 <div id="createRecipe" class="fixed inset-0 overflow-y-auto hidden z-50" aria-labelledby="modal-title-createRecipe" role="dialog" aria-modal="true">
+ <!-- Backdrop -->
+    <!-- <div id="modalBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"></div>     -->
 
-    <!-- Backdrop -->
-    <div id="modalBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"></div>    
+    <div class="fixed inset-0 bg-gray-900/37 transition-opacity" >    
 
     <!-- Modal container -->
     <div class="fixed inset-0 flex items-center justify-center p-4 z-50 pointer-events-none">
@@ -10,7 +11,7 @@
                     <div class="bg-white">
                            <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
                                 <h3 class="text-xl font-semibold text-gray-900">Create New Recipe</h3>
-                                <button onclick="document.getElementById('createRecipe').classList.add('hidden')" id="close-recipe-modal-x" class="text-gray-400 hover:text-gray-700 transition">
+                                <button onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden');"  id="close-recipe-modal-x" class="text-gray-400 hover:text-gray-700 transition">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
@@ -240,16 +241,13 @@
 
                     <div class="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 mt-4">
                         <button 
-                            onclick="document.getElementById('createRecipe').classList.add('hidden')"
+                            onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden');" 
                             type="button" 
                             class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
                         >
                             Cancel
                         </button>                
-                        <button 
-                            type="submit"
-                            class="px-6 py-2.5 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#2d3441] transition"
-                        >
+                        <button class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150"> -->
                             Create Recipe
                         </button>    
                     </div>

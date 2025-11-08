@@ -97,11 +97,17 @@
             const buttons = parent.querySelectorAll('button');
             buttons.forEach(button => {
                 button.setAttribute('aria-pressed', 'false');
+                // Reset styling for all buttons
+                if (button.classList.contains('bg-[#111827]')) {
+                    button.classList.remove('bg-[#111827]', 'text-white');
+                    button.classList.add('bg-white', 'text-[#111827]');
+                }
             });
-            clickedButton.setAttribute('aria-pressed', 'true');            
+            clickedButton.setAttribute('aria-pressed', 'true');
+            // Apply active styling to clicked button
+            clickedButton.classList.remove('bg-white', 'text-[#111827]');
+            clickedButton.classList.add('bg-[#111827]', 'text-white');
         }
-
-
     </script>
 </body>
 </html>

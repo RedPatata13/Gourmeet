@@ -27,20 +27,37 @@ Route::middleware('guest')->group(function () {
 });
 
 // put routes that need user data here (p much anything that wasnt in the login and sign up page)
+// Route::middleware('auth')->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+    
+//     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    
+//     Route::get('/', function () {
+//         return redirect()->route('dashboard');
+//     })->name('home');
+
+//     Route::get('/recipes', function () {
+//         return view('recipes');
+//     })->name('recipes');
+// });
+
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/feed', function () {
+        return view('feed'); 
+    })->name('feed');
     
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     
+    // testing for the layout stuff
     Route::get('/', function () {
-        return redirect()->route('dashboard');
+        return view('feed'); 
     })->name('home');
 
-    Route::get('/recipes', function () {
-        return view('recipes');
-    })->name('recipes');
+    Route::get('/profile', function () {
+        return view('profile'); 
+    })->name('profile');
 });
 
 // this shit prob appears if something didn't get configged

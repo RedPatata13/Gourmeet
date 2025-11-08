@@ -71,8 +71,8 @@
                 <!-- feet stuff (texts) 😏 -->
                 <div class="flex items-center">
                     <label class="inline-flex items-center gap-2 text-gray-700">
-                            <a href="#" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
-                            <a href="#" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
+                            <a href="#" class="text-gray-900 hover:underline font-medium font-bold">Terms of Service</a> and 
+                            <a href="#" class="text-gray-900 hover:underline font-medium font-bold">Privacy Policy</a>
                         </label>
                 </div>
             </div>

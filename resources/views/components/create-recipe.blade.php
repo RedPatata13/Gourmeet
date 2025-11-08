@@ -1,26 +1,23 @@
-<div id="createRecipe" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title-createRecipe" role="dialog" aria-model="true">
+<div id="createRecipe" class="fixed inset-0  overflow-y-auto hidden" aria-labelledby="modal-title-createRecipe" role="dialog" aria-model="true">
 
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" onclick="document.getElementById('createRecipe').classList.add('hidden')">    
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" >    
 
         <!-- modal container -->
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0 z-99">
             <center>
                 <!-- panel -->
-                 <!-- createRecipe modal -->
-    <div id="create-recipe-modal" class="hidden fixed inset-0 z-50 bg-gray-900/70 flex items-center justify-center p-4">
-    
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden max-h-[95vh] flex flex-col">
-            
-            <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
-                <h3 class="text-xl font-semibold text-gray-900">Create New Recipe</h3>
-                <button id="close-recipe-modal-x" class="text-gray-400 hover:text-gray-700 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+                <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-y-auto text-left max-h-[95vh] flex flex-col">
+                    <div class="bg-white p-6 sm:p-8">
+                           <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
+                                <h3 class="text-xl font-semibold text-gray-900">Create New Recipe</h3>
+                                <button onclick="document.getElementById('createRecipe').classList.add('hidden')" id="close-recipe-modal-x" class="text-gray-400 hover:text-gray-700 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
 
-            <div data-modal-content class="p-6 space-y-6 overflow-y-auto flex-grow">
+                            <div data-modal-content class="p-6 space-y-6 overflow-y-auto flex-grow">
                 
                 <div>
                     <label for="recipe-title" class="block text-sm font-medium text-gray-700">Recipe Title</label>
@@ -92,18 +89,20 @@
                     <textarea rows="3" placeholder="Step 1" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 placeholder-gray-400 focus:border-[#111827] resize-none"></textarea>
                 </div>
 
-            </div>
+            </div>  
+                    </div>
 
-            <div class="p-4 border-t border-gray-100 flex justify-end space-x-3">
-                <button id="close-recipe-modal-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
-                    Cancel
-                </button>
-                <button class="px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150">
-                    Create Recipe
-                </button>
-            </div>
-        </div>
-    </div>
+                    <div class="flex justify-end items-end px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
+                        <button 
+                            onclick="document.getElementById('createRecipe').classList.add('hidden')"
+                            type="button" 
+                            class="px-4 py-2 mr-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
+                            Close
+                        </button>                
+                        <button class="px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150">
+                            Create Recipe
+                        </button>    
+                    </div>
 
                 </div>
             </center>

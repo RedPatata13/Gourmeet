@@ -71,8 +71,8 @@
                 <!-- feet stuff (texts) 😏 -->
                 <div class="flex items-center">
                     <label class="inline-flex items-center gap-2 text-gray-700">
-                            <a href="#" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
-                            <a href="#" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
+                            <a href="#" id="tosLink" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
+                            <a href="#" id="privacyLink" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
                         </label>
                 </div>
             </div>
@@ -83,6 +83,12 @@
 <x-create-recipe>
 
 </x-create-recipe>
+
+    <!-- Include Terms of Service Modal -->
+    <x-tosModal />
+    
+    <!-- Include Privacy Policy Modal -->
+    <x-privacy-policy-Modal />
 
     <script>
         // for handling of clicked button group on mainFoodPage

@@ -138,7 +138,7 @@
                             >
                             I agree to the 
                             <a href="#" id="tosLink" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
-                            <a href="#" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
+                            <a href="#" id="privacyLink" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
                         </label>
                     </div>
                     <div id="termsError" class="mt-2 text-sm text-red-600 hidden"></div>
@@ -179,6 +179,9 @@
 
     <!-- Include Terms of Service Modal -->
     <x-tosModal />
+    
+    <!-- Include Privacy Policy Modal -->
+    <x-privacy-policy-Modal />
 
     <script>
         document.getElementById('registerForm').addEventListener('submit', async function(e) {

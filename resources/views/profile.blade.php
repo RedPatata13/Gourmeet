@@ -1,6 +1,6 @@
 <x-app-layout> 
 
-
+    <div class="w-200 flex flex-col ">
         <!-- main stuff goes here -->
             <div class="p-6 border-b border-gray-200">
                 <h3 class="text-2xl font-bold text-gray-900">User Profile</h3>
@@ -9,7 +9,7 @@
 
             <div  class="p-6 overflow-y-auto flex-grow">
                 <div class="flex justify-start items-center space-x-4 mb-8">
-                    <img class="w-24 h-24 rounded-full object-cover border-2 border-gray-300 text-center items-center" src="../icons/PNGs/light/user-light.png" alt="Profile image">
+                    <img class="w-24 h-24 rounded-full object-cover border-2 border-gray-300 " src="{{ asset('user-light.png') }}"  alt="Profile image">
                     <div>
                         <h4 class="text-lg font-semibold text-gray-900">Profile Picture</h4>
                         <p class="text-sm text-gray-600 mb-2">Update your profile image.</p>
@@ -65,6 +65,13 @@
                         Update Password
                     </button>
                 </div>
+                <form class="border-t pt-5 mt-5" method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-gray-900 border-1 border-gray-900 bg-white px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-200 text-sm font-medium">
+                        Logout
+                    </button>
+                </form>
             </div>
+    </div>
 
 </x-app-layout> 

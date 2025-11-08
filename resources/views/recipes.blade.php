@@ -9,10 +9,14 @@
 <body>
     <div class="text-center text-4xl font-bold p-8">Finish this shit pls</div>
     <p class="text-center">anw get rick rolled</p>
-<script>
+
+
+<!-- <script>
     
     setTimeout(() => {
         window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1';
     }, 1000);
-</script>
+</script> -->
+
+
 </body>

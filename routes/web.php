@@ -61,6 +61,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
         return view('profile'); 
     })->name('profile');
+
+    Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])
+        ->name('recipes.like');
 });
 
 // this shit prob appears if something didn't get configged
@@ -75,8 +78,3 @@ Route::get('/recipes', fn() => view('recipes.index', ['recipes' => \App\Models\R
 // Route::get('/recipe-details', fn() => view('recipeDetails'), data: ['recipes' => \App\Models\Recipe]);
 Route::get('/recipe/{recipe}', [RecipeController::class, 'show'])->name('recipeDetails');
 Route::post('/recipes', [RecipeController::class, 'store'])->middleware('auth:sanctum');
-
-Route::middleware('auth')->group(function () {
-    Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])
-        ->name('recipes.like');
-});

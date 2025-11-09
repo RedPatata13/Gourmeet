@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Gourmeet</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body class="min-h-screen bg-gray-50">
+    @livewireScripts
     <nav class="shadow-sm border-b">
         <div class="px-4">
             <div class="flex justify-between h-16">
@@ -45,7 +47,7 @@
     </nav>
 
     <main class="p-8 flex-grow mb-20 flex justify-center">
-        {{ $slot }} 
+        {{ $slot }}
     </main>
 
     <footer>
@@ -71,7 +73,7 @@
                 <!-- feet stuff (texts) 😏 -->
                 <div class="flex items-center">
                     <label class="inline-flex items-center gap-2 text-gray-700">
-                            <a href="#" id="tosLink" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and 
+                            <a href="#" id="tosLink" class="text-gray-900 hover:underline font-medium">Terms of Service</a> and
                             <a href="#" id="privacyLink" class="text-gray-900 hover:underline font-medium">Privacy Policy</a>
                     </label>
                 </div>
@@ -90,7 +92,7 @@
 
     <!-- Include Terms of Service Modal -->
     <x-tosModal />
-    
+
     <!-- Include Privacy Policy Modal -->
     <x-privacy-policy-Modal />
 

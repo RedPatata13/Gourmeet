@@ -7,6 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-gray-50">
+    <livewire:test-component />
     <nav class="shadow-sm border-b">
         <div class="px-4">
             <div class="flex justify-between h-16">
@@ -50,7 +51,7 @@
         </div>
     </nav>
 
-    
+
     <main class="p-8 flex-grow mb-20">
         <!-- main stuff goes here -->
         <div class="">
@@ -89,7 +90,7 @@
 
             <!-- card container -->
             <div class="flex flex-wrap gap-15 justify-start items-center mt-10 m-15">
-                
+
                 <!-- food card -->
                 <x-food-card>
 
@@ -105,14 +106,14 @@
         // for handling of clicked button group on mainFoodPage
         function handleSelection(clickedButton) {
             const parent = clickedButton.parentElement;
-            
+
             const buttons = parent.querySelectorAll('button');
             buttons.forEach(button => {
                 button.setAttribute('aria-pressed', 'false');
             });
 
             clickedButton.setAttribute('aria-pressed', 'true');
-            
+
         }
     </script>
 </body>

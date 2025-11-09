@@ -6,7 +6,7 @@
             <p class="text-gray-600 text-sm mt-1">Manage your profile information, username, email, and password.</p>
         </div>
 
-        <div class="p-6 overflow-y-auto flex-grow">
+        <div class="p-6 overflow-y-auto grow">
 
             @if (session()->has('message'))
                 <div class="mb-4 p-2 bg-green-100 text-green-800 rounded">
@@ -86,7 +86,7 @@
 
             <form class="border-t pt-5 mt-5" method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="text-gray-900 border-1 border-gray-900 bg-white px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-200 text-sm font-medium">
+                <button type="submit" class="text-gray-900 border border-gray-900 bg-white px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-200 text-sm font-medium">
                     Logout
                 </button>
             </form>

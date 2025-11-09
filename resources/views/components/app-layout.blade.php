@@ -103,29 +103,10 @@
         </div>
     </footer>
 
-<<<<<<< HEAD
     {{-- COMPONENTS --}}
     <x-create-recipe />
     <x-view-recipe />
     {{-- <x-tosModal /> --}}
-=======
-<x-create-recipe>
-
-</x-create-recipe>
-
-<x-view-recipe>
-
-</x-view-recipe>
-
-<x-edit-recipe>
-
-</x-edit-recipe>
-
-    <!-- Include Terms of Service Modal -->
-    <x-tosModal />
-    
-    <!-- Include Privacy Policy Modal -->
->>>>>>> d8d1cad46c0a6641f9238ea673f5eeeaf6d42112
     <x-privacy-policy-Modal />
 
     {{-- SCRIPTS --}}

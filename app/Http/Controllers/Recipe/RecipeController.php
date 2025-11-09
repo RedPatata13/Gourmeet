@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers\Recipe;
 
-// use App\Events\PostCreated;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 use App\Events\PostCreated;
+use App\Events\RecipeReacted;
+
 class RecipeController extends Controller
 {
-    public function store(Request $request){
+    /**
+     * Store a new recipe.
+     */
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'body' => 'required:|string',
+            'body' => 'required|json',
+            'description' => 'required|string|max:500',
             'ingredients' => 'nullable|json',
             'cover_image' => 'nullable|string',
             'prep_time' => 'nullable|integer',
@@ -21,62 +27,105 @@ class RecipeController extends Controller
             'servings' => 'nullable|integer',
         ]);
 
-        // $recipe = auth()->user()->posts()->create(($validated));
-        // $recipe = Auth::user()->recipe;
         $recipe = Auth::user()->posts()->create($validated);
 
-        // broadcast(new \App\Events\PostCreated($recipe))->toOthers();   
-        // event(PostCreated($recipe));
         event(new PostCreated($recipe));
 
-        return response()->json(['message', 'Recipe created successfully', 'recipe' => $recipe]);
+        return response()->json([
+            'message' => 'Recipe created successfully',
+            'recipe'  => $recipe
+        ]);
     }
-    public function show(Recipe $recipe){
+
+    /**
+     * Show a recipe by ID.
+     */
+    public function show(Recipe $recipe)
+    {
         $recipe->load('user');
         return view('recipeDetails', compact('recipe'));
     }
+
+    /**
+     * Show a recipe by slug.
+     */
     public function showBySlug($slug)
     {
         $recipe = Recipe::with('user')
                         ->where('slug', $slug)
                         ->firstOrFail();
-        
+
         return view('recipeDetails', compact('recipe'));
     }
-    public function react(Request $request, Recipe $recipe){
-        $validated = $request->validate(['type' => 'required|string']);
 
-        $reaction = $recipe->reactions()->updateOrCreate([
-            ['user_id' => Auth::id()],
-            ['title'=> $validated['title']],
+    /**
+     * Toggle a like reaction for the given recipe.
+     */
+    public function like(Request $request, Recipe $recipe)
+    {
+        $user = Auth::user();
+
+        // Toggle the like
+        $existingReaction = $recipe->reactions()
+                                   ->where('user_id', $user->id)
+                                   ->first();
+
+        if ($existingReaction) {
+            // Unlike
+            $existingReaction->delete();
+            $recipe->decrement('reaction_count');
+            $status = 'unliked';
+        } else {
+            // Like
+            $recipe->reactions()->create([
+                'user_id' => $user->id,
+            ]);
+            $recipe->increment('reaction_count');
+            $status = 'liked';
+        }
+
+        // Optionally broadcast for real-time updates
+        broadcast(new RecipeReacted($recipe, $user))->toOthers();
+
+        return response()->json([
+            'message' => 'Reaction updated successfully',
+            'status'  => $status,
+            'reaction_count' => $recipe->reaction_count,
         ]);
-
-        $recipe->update(['reaction_count' => $recipe->reactions()->count()]);
-
-        broadcast(new \App\Events\RecipeReacted($recipe, $reaction))->toOthers();
-
-        return response()->json(['message','Reaction added','reaction'=> $reaction]);
     }
 
-    public function comment(Request $request, Recipe $recipe){
+    /**
+     * Add a comment to a recipe.
+     */
+    public function comment(Request $request, Recipe $recipe)
+    {
         $validated = $request->validate([
             'body' => 'required|string',
             'parent_id' => 'nullable|exists:comments,id',
         ]);
 
         $comment = $recipe->comments()->create([
-            'user_id' => Auth::id(),
-            'body' => $validated['body'],
+            'user_id'   => Auth::id(),
+            'body'      => $validated['body'],
             'parent_id' => $validated['parent_id'] ?? null,
         ]);
 
         $recipe->increment('comment_count');
-    }
-// app/Http/Controllers/RecipeController.php
-public function index()
-{
-    $recipes = Recipe::with('user')->get();
-    return view('recipes.index', compact('recipes'));
-}
 
+        // (optional) broadcast event here, e.g., RecipeCommented
+
+        return response()->json([
+            'message' => 'Comment added successfully',
+            'comment' => $comment,
+        ]);
+    }
+
+    /**
+     * List all recipes (for index page).
+     */
+    public function index()
+    {
+        $recipes = Recipe::with('user')->latest()->get();
+        return view('recipes.index', compact('recipes'));
+    }
 }

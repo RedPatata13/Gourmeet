@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'My Laravel App')</title>
-    <!-- Optional: Add CSS here -->
-    {{-- <link rel="stylesheet" href="{{ asset('') }}"> --}}
     @vite('resources/css/app.css')
 </head>
 <body>
- {{-- @yield('header')
-  --}}
     <header class="bg-white shadow-sm border-b">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
@@ -35,7 +31,9 @@
                         <a href="{{ route('profile') }}" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Profile</a>
                     </nav>
                 </div>
-
+                <script>
+                    const dialog = document.getElementById('createRecipe')
+                </script>
                 {{-- right side --}}
                 <div class="flex items-center gap-4">
                     @auth
@@ -73,13 +71,66 @@
             </div>
         </nav>
     </header>
-    <!-- Main Content -->
     <main style="padding: 20px;" class="">
         @yield('content')
     </main>
-
+    <x-create-recipe />
     <footer style="padding: 20px; background: #f0f0f0; text-align: center; position: fixed; bottom: 0; width: 100%;">
         &copy; {{ date('Y') }} My Laravel App. All rights reserved.
     </footer>
+    <script>
+        // mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', String(!expanded));
+                mobileNav.classList.toggle('hidden');
+            });
+        }
+
+        // open/close create recipe modal helpers
+        function openCreateRecipe() {
+            const modal = document.getElementById('createRecipe');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+        function closeCreateRecipe() {
+            const modal = document.getElementById('createRecipe');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // selection group helper (keeps your original behavior)
+        function handleSelection(clickedButton) {
+            const parent = clickedButton.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.setAttribute('aria-pressed', 'false');
+                if (button.classList.contains('bg-[#111827]')) {
+                    button.classList.remove('bg-[#111827]', 'text-white');
+                    button.classList.add('bg-white', 'text-[#111827]');
+                }
+            });
+            clickedButton.setAttribute('aria-pressed', 'true');
+            clickedButton.classList.remove('bg-white', 'text-[#111827]');
+            clickedButton.classList.add('bg-[#111827]', 'text-white');
+        }
+
+        // Open modals from footer links
+        document.getElementById('tosLink')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('[data-modal="tos"]')?.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+        document.getElementById('privacyLink')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('[data-modal="privacy"]')?.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+    </script>
 </body>
 </html>

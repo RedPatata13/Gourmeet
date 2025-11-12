@@ -25,7 +25,7 @@
                         </svg>
                     </div>
                 </div>
-                <h1 class="mt-4 text-2xl font-bold text-white">RecipeShare</h1>
+                <h1 class="mt-4 text-2xl font-bold text-white">Gourmeet</h1>
                 <p class="text-gray-300 mt-2">Reset your password</p>
             </div>
 

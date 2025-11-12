@@ -247,7 +247,7 @@
                         >
                             Cancel
                         </button>                
-                        <button class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150"> -->
+                        <button class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150">
                             Create Recipe
                         </button>    
                     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.AppLayout')
 
 @section('content')
-<div class="w-200 flex flex-col">
+<div class="w-200 flex flex-col mb-[54px]">
     <div class="p-6 border-b border-gray-200">
         <h3 class="text-2xl font-bold text-gray-900">User Profile</h3>
         <p class="text-gray-600 text-sm mt-1">Manage your profile information, username, email, and password.</p>

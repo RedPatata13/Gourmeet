@@ -1,4 +1,4 @@
-<div class="relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 h-260 w-200 flex flex-col">
+<div class="relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 h-100 w-100 flex flex-col">
 
     <!-- Clickable area only for image -->
     <div class="relative flex-shrink-0">

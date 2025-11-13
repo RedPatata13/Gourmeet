@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -60,8 +61,12 @@ class ProfileController extends Controller
         return back()->with('message', 'Password updated!');
     }
 
-   public function updateProfilePicture(Request $request)
+    public function updateProfilePicture(Request $request)
     {
+        if (!$request->isMethod('post')) {
+            abort(405, 'POST method required');
+        }
+
         $request->validate([
             'newProfilePicture' => 'required|image|max:2048',
         ]);
@@ -69,11 +74,14 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if ($request->hasFile('newProfilePicture')) {
+            $file = $request->file('newProfilePicture');
+            $filename = uniqid('profile_') . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('profile-pictures', $filename, 'public');
+
             if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
                 Storage::disk('public')->delete($user->profile_picture);
             }
 
-            $path = $request->file('newProfilePicture')->store('profile-pictures', 'public');
             $user->profile_picture = $path;
             $user->save();
         }

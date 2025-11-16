@@ -172,7 +172,7 @@
             
             <!-- Comment Form -->
             <div class="mb-8">
-                {{-- <form action="{{ route('comments.store', $recipe) }}" method="POST" class="space-y-4"> --}}
+                <form action="{{ route('recipe.comment', $recipe) }}" method="POST" class="space-y-4">
                     @csrf
                     <textarea 
                         name="body"
@@ -186,12 +186,12 @@
                             Post Comment
                         </button>
                     </div>
-                {{-- </form> --}}
+                </form>
             </div>
             
             <!-- Comments List -->
             <div class="space-y-6">
-                @forelse($comments as $comment)
+                @forelse($recipe->comments as $comment)
                     <div class="flex space-x-4">
                         <div class="w-10 h-10 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                             {{ substr($comment->user->name ?? 'U', 0, 1) }}
@@ -203,11 +203,11 @@
                                     <span class="text-gray-500 text-sm">{{ $comment->created_at->diffForHumans() }}</span>
                                 </div>
                                 @if(auth()->check() && auth()->id() === $comment->user_id)
-                                    {{-- <form action="{{ route('comments.destroy', $comment) }}" method="POST"> --}}
+                                    {{-- <form action="{{ route('comments.destroy', $comment) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="text-red-500 text-sm">Delete</button>
-                                    {{-- </form> --}}
+                                    </form> --}}
                                 @endif
                             </div>
                             <p class="text-gray-700">{{ $comment->body }}</p>

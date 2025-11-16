@@ -108,6 +108,7 @@ class RecipeController extends Controller
         ]);
 
         $comment = $recipe->comments()->create([
+            'recipe_id' => $recipe->id,
             'user_id'   => Auth::id(),
             'body'      => $validated['body'],
             'parent_id' => $validated['parent_id'] ?? null,
@@ -117,10 +118,12 @@ class RecipeController extends Controller
 
         // (optional) broadcast event here, e.g., RecipeCommented
 
-        return response()->json([
-            'message' => 'Comment added successfully',
-            'comment' => $comment,
-        ]);
+        // return response()->json([
+        //     'message' => 'Comment added successfully',
+        //     'comment' => $comment,
+        // ]);
+
+        return redirect()->back()->with('success','Comment added successfully');
     }
 
     /**

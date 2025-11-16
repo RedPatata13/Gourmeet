@@ -7,7 +7,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-gray-50">
-    <livewire:test-component />
     <nav class="shadow-sm border-b">
         <div class="px-4">
             <div class="flex justify-between h-16">

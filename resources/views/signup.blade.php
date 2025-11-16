@@ -197,7 +197,7 @@
             const formData = new FormData(this);
 
                         try {
-                            const response = await fetch('/register', {
+                            const response = await fetch('{{ route('register') }}', {
                                 method: 'POST',
                                 headers: {
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

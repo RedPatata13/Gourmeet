@@ -41,10 +41,13 @@ class RecipeController extends Controller
      * Show a recipe by ID.
      */
     public function show(Recipe $recipe)
-    {
-        $recipe->load('user');
-        return view('recipeDetails', compact('recipe'));
-    }
+{
+    // Eager load relationships
+    $recipe->load('user', 'comments.user');
+
+    return view('recipeDetails', compact('recipe'));
+}
+
 
     /**
      * Show a recipe by slug.

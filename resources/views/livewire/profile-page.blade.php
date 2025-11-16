@@ -1,4 +1,4 @@
-<div>
+<div class="min-h-screen flex justify-center bg-gray-50">
 
     <div class="w-200 flex flex-col">
         <div class="p-6 border-b border-gray-200">

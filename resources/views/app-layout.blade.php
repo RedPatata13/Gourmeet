@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Gourmeet</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
 </head>
 <body class="min-h-screen bg-gray-50">
-    @livewireScripts
     <nav class="shadow-sm border-b">
         <div class="px-4">
             <div class="flex justify-between h-16">

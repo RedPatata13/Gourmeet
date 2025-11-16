@@ -5,16 +5,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Recipe\RecipeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
     //auth
     Route::get('/login', [PageController::class, 'login'])->name('login');
     Route::get('/register', [PageController::class, 'register'])->name('register');
-    
+
     // auth
     Route::post('/login', [LoginController::class, 'store']);
     Route::post('/register', [RegisterController::class, 'store']);
-    
+
     // password stuff
     Route::get('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -31,9 +32,9 @@ Route::middleware('guest')->group(function () {
 //     Route::get('/dashboard', function () {
 //         return view('dashboard');
 //     })->name('dashboard');
-    
+
 //     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
-    
+
 //     Route::get('/', function () {
 //         return redirect()->route('dashboard');
 //     })->name('home');
@@ -45,22 +46,30 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Route::get('/feed', function () {
-    //     return view('feed'); 
+    //     return view('feed');
     // })->name('feed');
-    
+
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
-    
+
     // testing for the layout stuff
     // Route::get('/', function () {
-    //     return view('recipes.index'); 
+    //     return view('recipes.index');
     // })->name('home');
     Route::get('/', fn() => view('recipes.index', ['recipes' => \App\Models\Recipe::all()]))->name('home');
     Route::get('/feed', fn() => view('recipes.index', ['recipes' => \App\Models\Recipe::all()]))->name('feed');
 
 
-    Route::get('/profile', function () {
-        return view('profile'); 
-    })->name('profile');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/update-info', [ProfileController::class, 'updatePersonalInfo'])->name('profile.updateInfo');
+
+    Route::post('/profile/update-email', [ProfileController::class, 'updateEmail'])->name('profile.updateEmail');
+
+    Route::post('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+
+    Route::post('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.updatePicture');
+});
+
 });
 
 // this shit prob appears if something didn't get configged
@@ -75,6 +84,7 @@ Route::get('/recipes', fn() => view('recipes.index', ['recipes' => \App\Models\R
 // Route::get('/recipe-details', fn() => view('recipeDetails'), data: ['recipes' => \App\Models\Recipe]);
 Route::get('/recipe/{recipe}', [RecipeController::class, 'show'])->name('recipeDetails');
 Route::post('/recipes', [RecipeController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/recipe/{recipe}/comment', [RecipeController::class,'comment'])->name('recipe.comment');
 
 Route::middleware('auth')->group(function () {
     Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])

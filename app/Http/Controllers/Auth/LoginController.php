@@ -21,17 +21,16 @@ class LoginController extends Controller
         $request->validate([
             'email'=>['required','string','email'],
             'password'=>['required','string'],
-
-        ]);
+        ]); //this one I have an idea that it's jus setting the rules for valid formatting: [required: cant be empty, string: type, email: format]
 
         if(! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
 
-        }
+        } // only part that I get is that it throws the exception
 
-        $request->session()->regenerate();
+        $request->session()->regenerate(); // absolutely no clue what this does
 
         // return response()->json([
         //     'message' => 'Login successful',
@@ -43,7 +42,11 @@ class LoginController extends Controller
         //     ]
         // ]);
 
-        return redirect()->intended(route('dashboard'));
+// <<<<<<< HEAD
+//         return redirect()->intended(route('dashboard')); // I get this part
+// =======
+        return redirect()->intended(route('feed'));
+// >>>>>>> yoeBranch
     }
     /**
      * Logs out current user

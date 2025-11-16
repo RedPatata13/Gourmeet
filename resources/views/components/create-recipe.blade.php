@@ -1,16 +1,16 @@
 <div id="createRecipe" class="fixed inset-0 overflow-y-auto hidden z-50" aria-labelledby="modal-title-createRecipe" role="dialog" aria-modal="true">
     <!-- Backdrop -->
-    <div class="fixed inset-0 bg-gray-900/37 transition-opacity"></div>    
+    <div class="fixed inset-0 bg-gray-900/37 transition-opacity"></div>
 
     <!-- Modal container -->
     <div class="fixed inset-0 flex items-center justify-center p-4 z-50 pointer-events-none">
         <!-- Modal panel -->
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-5xl overflow-hidden text-left max-h-[95vh] flex flex-col relative z-50 pointer-events-auto">
-            
+
             <!-- Header -->
             <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
                 <h3 class="text-xl font-semibold text-gray-900">Create New Recipe</h3>
-                <button onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden');" class="text-gray-400 hover:text-gray-700 transition">
+                <button onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden'); resetCreateRecipeForm();" class="text-gray-400 hover:text-gray-700 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -52,7 +52,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
-                            
+
                             <div id="category-dropdown-menu" class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
                                 <div class="py-1">
                                     <button type="button" class="category-option w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-value="Breakfast">Breakfast</button>
@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 mt-4">
-                    <button type="button" onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden');" class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                    <button type="button" onclick="document.getElementById('createRecipe').classList.add('hidden'); document.body.classList.remove('overflow-hidden'); resetCreateRecipeForm();" class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
                         Cancel
                     </button>
                     <button type="submit" class="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-[#111827] rounded-lg hover:bg-[#29354d] transition duration-150">
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     categoryDropdownButton.addEventListener('click', function() {
         categoryDropdownMenu.classList.toggle('hidden');
     });
-    
+
     categoryOptions.forEach(option => {
         option.addEventListener('click', function() {
             const value = this.getAttribute('data-value');
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
             categoryDropdownMenu.classList.add('hidden');
         });
     });
-    
+
     document.addEventListener('click', function(event) {
         if (!categoryDropdownButton.contains(event.target) && !categoryDropdownMenu.contains(event.target)) {
             categoryDropdownMenu.classList.add('hidden');
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const result = await response.json();
-            
+
 
             if (response.ok) {
                 alert('Recipe created successfully!');
@@ -338,6 +338,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// resetting modal's form if cancelled
+
+function resetCreateRecipeForm() {
+    const form = document.getElementById('recipeForm');
+    form.reset();
+
+    document.getElementById('category-selected-text').textContent = 'Breakfast';
+    document.getElementById('recipe-category').value = 'Breakfast';
+
+    const preview = document.getElementById('image-preview');
+    const previewImage = document.getElementById('preview-image');
+    preview.classList.add('hidden');
+    previewImage.src = '';
+
+    const ingredientsContainer = document.getElementById('ingredients-container');
+    ingredientsContainer.innerHTML = `
+        <div class="ingredient-item flex gap-2">
+            <input type="text" name="ingredients[]" placeholder="Ingredient 1" class="flex-1 border border-gray-300 rounded-lg shadow-sm p-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#111827 focus:border-[#111827] transition" required />
+            <button type="button" class="remove-ingredient-btn text-gray-400 hover:text-red-600 transition p-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+        </div>
+    `;
+
+    const instructionsContainer = document.getElementById('instructions-container');
+    instructionsContainer.innerHTML = `
+        <div class="instruction-item flex gap-2">
+            <span class="flex items-center text-gray-500 font-medium pt-2">1.</span>
+            <textarea name="instructions[]" rows="2" placeholder="Step 1"
+                class="flex-1 border border-gray-300 rounded-lg shadow-sm p-2.5 placeholder-gray-400 focus:ring-2 focus:ring-[#111827] focus:border-[#111827] resize-none transition"
+                required></textarea>
+            <button type="button" class="remove-instruction-btn text-gray-400 hover:text-red-600 transition p-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+        </div>
+    `;
+}
 </script>
 </div>
 

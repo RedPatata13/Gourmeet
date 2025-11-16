@@ -197,11 +197,10 @@
             const formData = new FormData(this);
 
                         try {
-                            const response = await fetch(window.location.origin + '/register', {
+                            const response = await fetch('/register', {
                                 method: 'POST',
                                 headers: {
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    'Accept': 'application/json'
                                 },
                                 body: formData  // Use FormData instead of JSON
                             });

@@ -30,7 +30,7 @@
 
                 <div id="errorMessage" class="hidden mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"></div>
 
-                <form id="registerForm" action="{{ route('register') }}" method="POST" class="space-y-6">
+                <form id="registerForm" action="/register" method="POST" class="space-y-6">
                     @csrf
 
                     <div>
@@ -197,7 +197,7 @@
             const formData = new FormData(this);
 
                         try {
-                            const response = await fetch('{{ route('register') }}', {
+                            const response = await fetch('/register', {
                                 method: 'POST',
                                 headers: {
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
